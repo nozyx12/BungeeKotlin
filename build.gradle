@@ -1,0 +1,44 @@
+plugins {
+    id "java-library"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+group = "fr.nozyx"
+version = "2.0.0"
+
+configurations {
+    shadow
+    compile.extendsFrom shadow
+}
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name = "bungeecord-repo"
+        url = "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+
+    // Remove this repo if mojang-brigadier v1.2.9 is available in bungeecord-repo
+    maven {
+        name = "mojang-brigadier-repo"
+        url = "https://repo.glaremasters.me/repository/public/"
+    }
+}
+
+dependencies {
+    implementation "net.md-5:bungeecord-api:1.21-R0.1-SNAPSHOT"
+    shadow "org.jetbrains.kotlin:kotlin-stdlib:2.0.0"
+    shadow "org.jetbrains.kotlin:kotlin-reflect:2.0.0"
+}
+
+jar {
+    compileJava.options.encoding = "UTF-8"
+}
+
+shadowJar {
+    archiveClassifier = ""
+
+    configurations = [project.configurations.shadow]
+    from(project.sourceSets.main.output)
+}

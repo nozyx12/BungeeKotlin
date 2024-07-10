@@ -1,0 +1,5 @@
+name: BungeeKotlin
+version: 2.0.0
+author: Nozyx
+main: fr.nozyx.bungeekotlin.BungeeKotlin
+description: Bungeecord plugin which includes Kotlin libs to make Kotlin-using plugins usable
